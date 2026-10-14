@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -12,15 +10,15 @@ public class ChatServer {
             System.out.println("Chat Server is listening on port " + port);
 
             while (true) {
+                // 1. Wait for a client to connect (Blocks here)
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("New client connected: " + clientSocket.getInetAddress());
                 
-                // Wrap the raw byte stream in a reader that handles text lines
-                BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                // 2. Hand the client socket off to a new Thread
+                ClientHandler clientThread = new ClientHandler(clientSocket);
+                clientThread.start(); // This triggers the run() method in the background
                 
-                // Read the message
-                String clientMessage = reader.readLine();
-                System.out.println("Client says: " + clientMessage);
+                // 3. The loop instantly restarts and goes back to waiting at .accept()
             }
         } catch (IOException e) {
             System.out.println("Server error: " + e.getMessage());

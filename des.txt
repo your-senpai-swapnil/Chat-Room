@@ -9,3 +9,7 @@ while (true): The master game loop of your server. It ensures that after one cli
 
 
 Created the pipeline
+
+
+
+We removed the reading logic and replace it with our new thread.

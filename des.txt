@@ -5,3 +5,7 @@ ServerSocket: Reserves port 8080 on your machine.
 while (true): The master game loop of your server. It ensures that after one client connects, the server immediately goes back to listening for the next one.
 
 .accept(): This is a blocking method. The code literally stops on this line and waits. When a user connects, it unblocks, generates a Socket (the direct pipeline to that specific user), and moves to the print statement.
+
+
+
+Created the pipeline
